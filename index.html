@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💘 Happy Valentine's Day!</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Hearts Background -->
+    <div class="hearts-background"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1><i class="fas fa-heart"></i> Happy Valentine's Day! <i class="fas fa-heart"></i></h1>
+            <p class="subtitle">For the special person in my heart 💝</p>
+        </header>
+
+        <!-- Love Message -->
+        <div class="love-letter">
+            <div class="envelope" id="envelope">
+                <div class="envelope-flap"></div>
+                <div class="envelope-body">
+                    <p>Click to open the love letter 💌</p>
+                </div>
+            </div>
+            
+            <div class="letter" id="letter">
+                <h2><i class="fas fa-heart"></i> My Dearest,</h2>
+                <p>On this special day, I just wanted to tell you how much you mean to me. Every moment with you is like a beautiful dream I never want to wake up from.</p>
+                <p>You are the missing piece I never knew I was looking for. Thank you for being you, and for sharing your wonderful heart with me.</p>
+                <p class="signature">Forever yours,<br><span>Your Secret Admirer</span></p>
+                <button class="close-btn" id="closeBtn">Close Letter ❤️</button>
+            </div>
+        </div>
+
+        <!-- Photo Gallery -->
+        <div class="gallery">
+            <h2><i class="fas fa-images"></i> Our Memories</h2>
+            <div class="photos">
+                <div class="photo-frame"><div class="photo-placeholder">📸 Memory 1</div></div>
+                <div class="photo-frame"><div class="photo-placeholder">🌸 Memory 2</div></div>
+                <div class="photo-frame"><div class="photo-placeholder">🌹 Memory 3</div></div>
+            </div>
+        </div>
+
+        <!-- Love Meter -->
+        <div class="love-meter">
+            <h2><i class="fas fa-heartbeat"></i> Our Love Meter</h2>
+            <div class="meter-container">
+                <div class="meter-bar" id="meterBar"></div>
+            </div>
+            <p class="meter-text" id="meterText">Click the heart to measure our love!</p>
+            <button class="heart-btn" id="heartBtn">
+                <i class="fas fa-heart"></i> Measure Our Love!
+            </button>
+        </div>
+
+        <!-- Roses Section -->
+        <div class="roses">
+            <h2><i class="fas fa-seedling"></i> A Rose for You</h2>
+            <div class="rose-container" id="roseContainer">
+                <!-- Roses will appear here -->
+            </div>
+            <button class="rose-btn" id="roseBtn">
+                <i class="fas fa-magic"></i> Send a Virtual Rose
+            </button>
+        </div>
+
+        <!-- Message Form -->
+        <div class="message-form">
+            <h2><i class="fas fa-comment-heart"></i> Send a Love Message</h2>
+            <textarea id="loveMessage" placeholder="Write your love message here... 💬"></textarea>
+            <button class="send-btn" id="sendBtn">
+                <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>Made with <i class="fas fa-heart pulse"></i> for Valentine's Day 2024</p>
+            <p class="footer-note">You are loved more than you know! 💘</p>
+            <div class="social-icons">
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-whatsapp"></i>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Floating Hearts -->
+    <div class="floating-hearts"></div>
+
+    <!-- Audio -->
+    <audio id="loveSong" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-loving-you-117.mp3" type="audio/mpeg">
+    </audio>
+    
+    <div class="music-control">
+        <button id="musicBtn">
+            <i class="fas fa-music"></i> Toggle Music
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
