@@ -23,33 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Love Meter
-    const meterBar = document.getElementById('meterBar');
-    const meterText = document.getElementById('meterText');
-    const heartBtn = document.getElementById('heartBtn');
-    
-    if (heartBtn && meterBar && meterText) {
-        heartBtn.addEventListener('click', function() {
-            const randomLove = Math.floor(Math.random() * 101);
-            meterBar.style.width = randomLove + '%';
-            
-            if (randomLove < 30) {
-                meterText.textContent = `Only ${randomLove}%? We need more dates! 💔`;
-            } else if (randomLove < 70) {
-                meterText.textContent = `${randomLove}%! Our love is growing! 💖`;
-            } else {
-                meterText.textContent = `${randomLove}%! We're perfect together! 💘`;
-            }
-            
-            // Animate button
-            heartBtn.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                heartBtn.style.transform = 'scale(1)';
-            }, 200);
-        });
-    }
-    
-    // Virtual Roses
+    // Virtual Tulips (Changed from Roses to Tulips)
     const roseContainer = document.getElementById('roseContainer');
     const roseBtn = document.getElementById('roseBtn');
     let roseCount = 0;
@@ -59,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (roseCount < 20) {
                 const rose = document.createElement('div');
                 rose.className = 'rose';
-                rose.innerHTML = '🌹';
+                rose.innerHTML = '🌷'; // Changed from 🌹 to 🌷
                 rose.style.fontSize = (Math.random() * 30 + 20) + 'px';
                 rose.style.transform = `rotate(${Math.random() * 360}deg)`;
                 rose.style.margin = '5px';
@@ -67,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 roseContainer.appendChild(rose);
                 roseCount++;
                 
-                // Remove oldest rose if too many
+                // Remove oldest tulip if too many
                 if (roseCount > 15) {
                     roseContainer.removeChild(roseContainer.firstChild);
                     roseCount--;
@@ -76,223 +50,14 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Love Message Form
-    const loveMessage = document.getElementById('loveMessage');
-    const sendBtn = document.getElementById('sendBtn');
-    
-    if (sendBtn && loveMessage) {
-        sendBtn.addEventListener('click', function() {
-            const message = loveMessage.value.trim();
-            
-            if (message === '') {
-                alert('💝 Please write a love message first!');
-                loveMessage.focus();
-                return;
-            }
-            
-            // Show sending animation
-            const originalText = this.innerHTML;
-            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            this.disabled = true;
-            
-            // Simulate sending
-            setTimeout(() => {
-                // Show success message
-                alert('💌 Your love message has been sent to the universe!\n\n"' + message + '"\n\nMay it reach your loved one\'s heart! ❤️');
-                
-                // Reset form
-                loveMessage.value = '';
-                this.innerHTML = originalText;
-                this.disabled = false;
-                
-                // Show floating hearts
-                createMessageHearts();
-                
-                // Play sending sound
-                const sendSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3');
-                sendSound.volume = 0.3;
-                sendSound.play().catch(e => console.log("Sound play error:", e));
-                
-            }, 1500);
-        });
-        
-        // Add enter key support
-        loveMessage.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' && e.ctrlKey) {
-                sendBtn.click();
-            }
-        });
-    }
-    
-    function createMessageHearts() {
-        const messageForm = document.querySelector('.message-form');
-        if (!messageForm) return;
-        
-        for (let i = 0; i < 15; i++) {
-            const heart = document.createElement('div');
-            heart.innerHTML = '💖';
-            heart.style.position = 'absolute';
-            heart.style.fontSize = Math.random() * 25 + 20 + 'px';
-            heart.style.left = Math.random() * 100 + '%';
-            heart.style.top = '100%';
-            heart.style.opacity = '0';
-            heart.style.animation = `messageHeart ${Math.random() * 2 + 1}s ease-out forwards`;
-            heart.style.animationDelay = Math.random() * 0.5 + 's';
-            heart.style.zIndex = '1';
-            
-            messageForm.appendChild(heart);
-            
-            setTimeout(() => {
-                if (heart.parentNode) {
-                    heart.remove();
-                }
-            }, 2000);
-        }
-        
-        // Add CSS for animation
-        if (!document.querySelector('#messageHeartStyle')) {
-            const style = document.createElement('style');
-            style.id = 'messageHeartStyle';
-            style.textContent = `
-                @keyframes messageHeart {
-                    0% {
-                        transform: translateY(0) rotate(0deg);
-                        opacity: 1;
-                    }
-                    100% {
-                        transform: translateY(-200px) rotate(360deg);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-        }
-    }
-    
-    // Music Player
-    const musicBtn = document.getElementById('musicBtn');
-    const loveSong = document.getElementById('loveSong');
-    let isPlaying = false;
-    
-    if (musicBtn && loveSong) {
-        musicBtn.addEventListener('click', function() {
-            if (isPlaying) {
-                loveSong.pause();
-                musicBtn.innerHTML = '<i class="fas fa-music"></i> Play Music';
-            } else {
-                loveSong.play().catch(e => console.log("Music play error:", e));
-                musicBtn.innerHTML = '<i class="fas fa-pause"></i> Pause Music';
-            }
-            isPlaying = !isPlaying;
-        });
-        
-        // Auto-play music (with user interaction)
-        document.body.addEventListener('click', function initMusic() {
-            if (!isPlaying) {
-                loveSong.volume = 0.3;
-                loveSong.play().catch(e => console.log("Autoplay blocked"));
-                isPlaying = true;
-                musicBtn.innerHTML = '<i class="fas fa-pause"></i> Pause Music';
-            }
-            document.body.removeEventListener('click', initMusic);
-        });
-    }
-    
-    // Key to Heart functionality
-    const giveKeyBtn = document.getElementById('giveKeyBtn');
-    const acceptanceMessage = document.getElementById('acceptanceMessage');
-    const virtualHugBtn = document.getElementById('virtualHugBtn');
-    
-    if (giveKeyBtn) {
-        giveKeyBtn.addEventListener('click', function() {
-            // Show acceptance message
-            if (acceptanceMessage) {
-                acceptanceMessage.style.display = 'block';
-            }
-            
-            // Change button state
-            this.innerHTML = '<i class="fas fa-heart-circle-check"></i><span>Key Accepted!</span>';
-            this.style.background = 'linear-gradient(45deg, #4CAF50, #8BC34A)';
-            this.disabled = true;
-            
-            // Create heart explosion
-            createKeyHeartExplosion();
-            
-            // Play gentle sound
-            const keySound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3');
-            keySound.volume = 0.3;
-            keySound.play().catch(e => console.log("Sound error:", e));
-        });
-    }
-    
-    if (virtualHugBtn) {
-        virtualHugBtn.addEventListener('click', function() {
-            alert('🤗 Virtual hug sent with all my heart! Thank you for accepting my key. ❤️');
-            this.innerHTML = '<i class="fas fa-heart"></i> Hug Sent!';
-            this.style.background = 'linear-gradient(45deg, #ff1493, #ff69b4)';
-            this.disabled = true;
-        });
-    }
-    
-    function createKeyHeartExplosion() {
-        const keyContainer = document.querySelector('.key-container');
-        if (!keyContainer) return;
-        
-        const hearts = ['❤️', '💖', '💕', '💗', '💘', '💓', '💞'];
-        
-        for (let i = 0; i < 20; i++) {
-            const heart = document.createElement('div');
-            heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
-            heart.style.position = 'absolute';
-            heart.style.fontSize = Math.random() * 30 + 20 + 'px';
-            heart.style.left = Math.random() * 100 + '%';
-            heart.style.top = '50%';
-            heart.style.opacity = '0';
-            heart.style.animation = `keyHeartExplode ${Math.random() * 2 + 1}s ease-out forwards`;
-            heart.style.animationDelay = Math.random() * 0.3 + 's';
-            heart.style.zIndex = '10';
-            
-            keyContainer.appendChild(heart);
-            
-            setTimeout(() => {
-                if (heart.parentNode) {
-                    heart.remove();
-                }
-            }, 2000);
-        }
-        
-        // Add explosion animation style
-        if (!document.querySelector('#keyHeartExplodeStyle')) {
-            const style = document.createElement('style');
-            style.id = 'keyHeartExplodeStyle';
-            style.textContent = `
-                @keyframes keyHeartExplode {
-                    0% {
-                        transform: translateY(0) rotate(0deg) scale(0);
-                        opacity: 1;
-                    }
-                    50% {
-                        transform: translateY(-100px) rotate(180deg) scale(1.5);
-                        opacity: 0.8;
-                    }
-                    100% {
-                        transform: translateY(-200px) rotate(360deg) scale(0);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-        }
-    }
-    
-    // Emotional Message Interactivity - IMPORTANT: THIS IS WHAT YOU'RE MISSING!
+    // Emotional Message Interactivity
     const heartResponseBtn = document.getElementById('heartResponse');
     const messageResponseBtn = document.getElementById('messageResponse');
     
     console.log("Heart response button found:", heartResponseBtn);
     console.log("Message response button found:", messageResponseBtn);
     
-    // Heart Response Button
+    // Heart Response Button (One More Chance)
     if (heartResponseBtn) {
         console.log("Adding click event to heart response button");
         heartResponseBtn.addEventListener('click', function() {
@@ -301,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showVirtualHug();
             
             // Change button state
-            this.innerHTML = '<i class="fas fa-heart-circle-check"></i><span>Hug Sent!</span><small>Thank you ❤️</small>';
+            this.innerHTML = '<i class="fas fa-heart-circle-check"></i><span>One More Chance</span><small>Thank you ❤️</small>';
             this.style.background = 'linear-gradient(45deg, #4CAF50, #8BC34A)';
             this.disabled = true;
             
@@ -354,11 +119,11 @@ document.addEventListener('DOMContentLoaded', function() {
                        box-shadow:0 15px 35px rgba(0,0,0,0.3); border:3px solid white;">
                 <i class="fas fa-hands-holding-heart" style="font-size:4rem; margin-bottom:20px;"></i>
                 <h3 style="font-family:'Dancing Script'; font-size:2.5rem; margin:20px 0;">
-                    Virtual Hug Received! 🤗
+                    One More Chance! 🤗
                 </h3>
                 <p style="font-size:1.2rem; line-height:1.6;">
-                    Your hug means more than words can say.<br>
-                    Thank you for letting me know this reached your heart. ❤️
+                    Thank you for believing in us.<br>
+                    I won't let you down. ❤️
                 </p>
                 <button onclick="this.parentElement.parentElement.remove()" 
                         style="margin-top:25px; padding:12px 35px; background:white;
@@ -413,18 +178,30 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.appendChild(understandMessage);
     }
     
+    // Music Player
+    const musicBtn = document.getElementById('musicBtn');
+    const loveSong = document.getElementById('loveSong');
+    let isPlaying = false;
+    
+    if (musicBtn && loveSong) {
+        musicBtn.addEventListener('click', function() {
+            if (isPlaying) {
+                loveSong.pause();
+                musicBtn.innerHTML = '<i class="fas fa-music"></i> Play Music';
+            } else {
+                loveSong.play().catch(e => console.log("Music play error:", e));
+                musicBtn.innerHTML = '<i class="fas fa-pause"></i> Pause Music';
+            }
+            isPlaying = !isPlaying;
+        });
+    }
+    
     // Create floating hearts
     function createFloatingHearts() {
         const heartsContainer = document.querySelector('.floating-hearts');
         if (!heartsContainer) return;
         
-        const heartCount = 20;
-        
-        for (let i = 0; i < heartCount; i++) {
-            setTimeout(() => createHeart(), i * 300);
-        }
-        
-        // Continue creating hearts
+        // Create hearts periodically
         setInterval(createHeart, 1000);
     }
     
@@ -453,31 +230,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 5000);
     }
     
-    // Add click effect to social icons
-    const socialIcons = document.querySelectorAll('.social-icons i');
-    socialIcons.forEach(icon => {
-        icon.addEventListener('click', function() {
-            alert('Sharing love on social media! 💕');
-        });
-    });
-    
-    // Add hover effect to all interactive elements
-    const interactiveElements = document.querySelectorAll('button, .photo-frame, .envelope');
-    interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            el.style.transition = 'all 0.3s ease';
-        });
-    });
-    
-    // NEW: Add these missing animation functions
     function createHeartExplosion() {
         console.log("Creating heart explosion");
-        const messageForm = document.querySelector('.message-form');
-        if (!messageForm) {
-            console.log("Message form not found for heart explosion");
-            return;
-        }
-        
         const hearts = ['❤️', '💖', '💕', '💗', '💘', '💓', '💞'];
         
         for (let i = 0; i < 25; i++) {
@@ -512,12 +266,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         transform: translate(0, 0) rotate(0deg) scale(0);
                         opacity: 1;
                     }
-                    50% {
-                        transform: translate(${Math.random() * 100 - 50}px, -100px) rotate(180deg) scale(1.5);
-                        opacity: 0.8;
-                    }
                     100% {
-                        transform: translate(${Math.random() * 100 - 50}px, -200px) rotate(360deg) scale(0);
+                        transform: translate(${Math.random() * 200 - 100}px, -200px) rotate(360deg) scale(1);
                         opacity: 0;
                     }
                 }
@@ -528,11 +278,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function createGentleRain() {
         console.log("Creating gentle rain");
-        const messageForm = document.querySelector('.message-form');
-        if (!messageForm) {
-            console.log("Message form not found for gentle rain");
-            return;
-        }
         
         for (let i = 0; i < 20; i++) {
             const drop = document.createElement('div');
@@ -567,7 +312,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         opacity: 0.8;
                     }
                     100% {
-                        transform: translateY(100vh) rotate(${Math.random() * 20 - 10}deg);
+                        transform: translateY(100vh) rotate(10deg);
                         opacity: 0;
                     }
                 }
